@@ -1,6 +1,4 @@
 on:
-  # schedule:
-    # - cron: '0 * * * 1'
   workflow_dispatch:
 
 name: SonarQube Workflow
@@ -9,9 +7,9 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4    # v2에서 v4로 업데이트
     - name: Set up JDK 1.11
-      uses: AdoptOpenJDK/install-jdk@v4
+      uses: AdoptOpenJDK/install-jdk@v1
       with:
         version: '11'
         architecture: x64
@@ -21,7 +19,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build -x test
     - name: Upload build artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3    # v2에서 v3로 업데이트
       with:
         name: build
         path: build/classes
@@ -31,9 +29,9 @@ jobs:
     name: SonarQube
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4    # v2에서 v4로 업데이트
     - name: Donwload build artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v3    # v2에서 v3로 업데이트
       with:
         name: build
         path: build/classes
