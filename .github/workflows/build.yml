@@ -1,11 +1,8 @@
 name: Build
-
 on:
   push:
     branches:
       - master
-
-
 jobs:
   build:
     name: Build
@@ -13,16 +10,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
+      
+      # Node.js 설정 추가
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          
+      # 의존성 설치
+      - name: Install dependencies
+        run: npm install
+        
+      # SonarScanner 설치
+      - name: Install SonarScanner
+        run: |
+          npm install -g sonar-scanner
+          
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      - name: Install sonar-scanner
-        run: npm install -g sonar-scanner
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-      # - uses: sonarsource/sonarqube-quality-gate-action@master
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
