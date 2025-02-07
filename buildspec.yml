@@ -1,12 +1,6 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      python: 3.9
-    commands:
-      - echo "Installing Semgrep and AWS CLI..."
-      - pip install semgrep awscli #semgrep, aws cli 설치
 
   build:
     commands:
