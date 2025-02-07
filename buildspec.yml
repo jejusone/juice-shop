@@ -1,7 +1,10 @@
 version: 0.2
 
 phases:
-
+  install:
+    commands:
+      - echo "Installing semgrep.."
+      - pip install semgrep
   build:
     commands:
       - echo "Running Semgrep scan..."
