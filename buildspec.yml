@@ -9,8 +9,8 @@ phases:
     commands:
       - echo "Generaging timestamp..."
       - export TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
-      - echo "Semgrep logging..."
-      - semgrep login --token $SEMGREP_API_TOKEN
+      #- echo "Semgrep logging..."
+      #- semgrep login --token $SEMGREP_API_TOKEN
       - echo "Running Semgrep scan..."
       - semgrep ci --json > semgrep_results_$TIMESTAMP.json
       - echo "Uploading Semgrep results to S3..."
